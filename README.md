@@ -5,18 +5,16 @@
 - 和axiox一样的请求方式
 - 小程序api自定义拦截调用参数和返回结果
 
+## 注意⚠️：
+
+1.现在还不支持原生的小程序项目。
+
 ## 快速开始
 
 ### 安装
 
-- npm:
 ```js
 npm install wxapp-api-interceptors --save
-```
-- require
-下载到本地，移动dist/wxappApiInterceptors.js到你的项目。
-```js
-require(./wxappApiInterceptors.js)
 ```
 
 ### 使用
