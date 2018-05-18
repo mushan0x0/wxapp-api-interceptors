@@ -1,0 +1,17 @@
+{
+  "name": "wxapp-api-interceptors",
+  "version": "1.0.0",
+  "description": "微信小程序api拦截封装",
+  "main": "./dist/wxappApiInterceptors.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MuShan0x0",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-jest": "^21.15.0"
+  }
+}
