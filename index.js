@@ -6,29 +6,31 @@ export default (interceptors = {}) => {
       if (name === 'request') {
         return receiver.request;
       }
-      if (name === 'oldWx') {
-        return oldWx;
-      }
       if (name.includes('Sync')) {
         return oldWx[name];
       }
-      return (params = {}) => new Promise(async (resolve, reject) => {
-        let resFn = (res, cb) => {
-          cb(res);
-        };
-        if (interceptors[name]) {
-          const {request = () => params, response = obj => obj} = interceptors[name];
-          params = (await request(params)) || params;
-          resFn = async (res, cb) => {
-            res = (await response(res)) || res;
+      return (params = {}) => {
+        if (params.success || params.fail) {
+          return oldWx[name](params);
+        }
+        return new Promise(async (resolve, reject) => {
+          let resFn = (res, cb) => {
             cb(res);
           };
-        }
-        oldWx[name](Object.assign(params, {
-          success: res => resFn(res, resolve),
-          fail: res => resFn(res, reject),
-        }));
-      });
+          if (interceptors[name]) {
+            const {request = () => params, response = obj => obj} = interceptors[name];
+            params = (await request(params)) || params;
+            resFn = async (res, cb) => {
+              res = (await response(res)) || res;
+              cb(res);
+            };
+          }
+          oldWx[name](Object.assign(params, {
+            success: res => resFn(res, resolve),
+            fail: res => resFn(res, reject),
+          }));
+        });
+      };
     },
   });
 
@@ -64,6 +66,9 @@ export default (interceptors = {}) => {
   }, {
     get(receiver, method) {
       return (url, params = {}) => {
+        if (params.success || params.fail) {
+          return oldWx.request(params);
+        }
         Object.assign(params, {
           method,
         });
