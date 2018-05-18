@@ -5,7 +5,7 @@
 - 和axiox一样的请求方式
 - 小程序api自定义拦截调用参数和返回结果
 
-## 注意⚠️：
+## ⚠️注意：
 
 1.现在还不支持原生的小程序项目。
 
@@ -21,7 +21,7 @@ npm install wxapp-api-interceptors --save
 
 #### mpvue项目
 
-##### 编辑src/main.js文件：
+编辑src/main.js文件：
 ```js
 import wxApiInterceptors from 'wxapp-api-interceptors';
 
