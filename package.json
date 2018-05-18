@@ -8,6 +8,10 @@
   },
   "author": "MuShan0x0",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mushan0x0/wxapp-api-interceptors.git"
+  },
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
