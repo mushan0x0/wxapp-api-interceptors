@@ -25,7 +25,7 @@ require(./wxappApiInterceptors.js)
 
 ##### 编辑src/main.js文件：
 ```js
-import wxApiInterceptors form 'wxapp-api-interceptors';
+import wxApiInterceptors from 'wxapp-api-interceptors';
 
 wxApiInterceptors(); // 必须在调用小程序api之前调用
 ```
