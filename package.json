@@ -1,8 +1,8 @@
 {
   "name": "wxapp-api-interceptors",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "微信小程序api拦截封装",
-  "main": "index.js",
+  "main": "./dist/wxappApiInterceptors.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
