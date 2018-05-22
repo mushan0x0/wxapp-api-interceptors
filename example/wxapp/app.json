@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "page/example"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#333",
+    "navigationBarTitleText": "示例",
+    "navigationBarTextStyle": "white"
+  }
+}

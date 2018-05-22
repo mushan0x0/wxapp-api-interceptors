@@ -1,4 +1,4 @@
-export default (interceptors = {}) => {
+module.exports = (interceptors = {}) => {
     const oldWx = {...wx};
 
     wx = new Proxy({}, {
