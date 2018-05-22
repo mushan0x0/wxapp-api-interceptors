@@ -25,8 +25,9 @@ wxApiInterceptors(); // 必须在调用小程序api之前调用
 
 ##### 原生小程序项目
 
+下载该项目，解压移动文件夹`dist`里`wxApiInterceptors.js`到你自己的项目，详见[示例](https://github.com/mushan0x0/wxapp-api-interceptors/tree/master/example/wxapp)。
+
 ```js
-//下载该项目，解压移动文件夹`dist`里`wxApiInterceptors.js`到你自己的项目
 const wxApiInterceptors = require('./wxApiInterceptors');
 
 wxApiInterceptors(); // 必须在调用小程序api之前调用
@@ -60,7 +61,9 @@ wx.login({
 });
 ```
 
-## 自定义拦截器`wxApiInterceptors({[api]: {[request](params):params, [response](res):res}})`
+## 自定义拦截器
+
+使用方法及参数：`wxApiInterceptors({[api]: {[request](params):params, [response](res):res}})`
 
 #### 比如拦截wx.showModal的confirmColor默认值为red，调用成功后并拦截调用成功返回的结果。
 ```js
@@ -105,18 +108,20 @@ wx.request.post('https://test.com', {data: {userName: 'test'}})
     })
 ```
 
-## 也可以再继续拦截request api
+## 当然也可以再继续拦截request api
 
 比如设置request api默认的host:
 
 ```js
 wxApiInterceptors({
-    request(params) {
-        const host = 'https://test.com'
-        if (!/^(http|\/\/)/.test(params.url)) {
-            params.url = host + params.url;
-        }
-        return params;
-    }
+    request: {
+        request(params) {
+            const host = 'https://test.com'
+            if (!/^(http|\/\/)/.test(params.url)) {
+                params.url = host + params.url;
+            }
+            return params;
+        },
+    },
 });
 ```
