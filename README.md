@@ -5,10 +5,6 @@
 - 和axiox一样的请求方式
 - 小程序api自定义拦截调用参数和返回结果
 
-## ⚠️注意：
-
-1.需要关掉项目的es6转es5开关
-
 ## 快速开始
 
 ### 安装
@@ -19,11 +15,19 @@ npm install wxapp-api-interceptors --save
 
 ### 使用
 
-#### mpvue项目
+##### mpvue项目
 
-编辑src/main.js文件：
 ```js
 import wxApiInterceptors from 'wxapp-api-interceptors';
+
+wxApiInterceptors(); // 必须在调用小程序api之前调用
+```
+
+##### 原生小程序项目
+
+```js
+//下载该项目，解压移动文件夹`dist`里`wxApiInterceptors.js`到你自己的项目
+const wxApiInterceptors = require('./wxApiInterceptors');
 
 wxApiInterceptors(); // 必须在调用小程序api之前调用
 ```
@@ -32,7 +36,17 @@ wxApiInterceptors(); // 必须在调用小程序api之前调用
 
 不必传success，和fail参数。
 
-##### 原生代码：
+##### 函数式异步调用方式：
+
+```js
+wx.login()
+    .then(wx.getUserInfo)
+    .then(({userInfo}) => {
+        this.setData({userInfo});
+    })
+```
+
+##### 也兼容原生的调用方式：
 
 ```js
 wx.login({
@@ -46,17 +60,7 @@ wx.login({
 });
 ```
 
-##### 使用后：
-
-```js
-wx.login()
-    .then(wx.getUserInfo)
-    .then(({userInfo}) => {
-        this.setData({userInfo});
-    })
-```
-
-## 自定义拦截器
+## 自定义拦截器`wxApiInterceptors({[api]: {[request](params):params, [response](res):res}})`
 
 #### 比如拦截wx.showModal的confirmColor默认值为red，调用成功后并拦截调用成功返回的结果。
 ```js
@@ -99,4 +103,20 @@ wx.request.post('https://test.com', {data: {userName: 'test'}})
     .then(({data}) => {
         console.log(data);
     })
+```
+
+## 也可以再继续拦截request api
+
+比如设置request api默认的host:
+
+```js
+wxApiInterceptors({
+    request(params) {
+        const host = 'https://test.com'
+        if (!/^(http|\/\/)/.test(params.url)) {
+            params.url = host + params.url;
+        }
+        return params;
+    }
+});
 ```

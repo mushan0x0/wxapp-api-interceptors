@@ -1,4 +1,4 @@
-const wxApiInterceptors = require('./wxApiInterceptors.wxapp');
+const wxApiInterceptors = require('./wxApiInterceptors');
 
 wxApiInterceptors({
     showModal: {
