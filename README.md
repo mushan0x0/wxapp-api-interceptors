@@ -15,7 +15,7 @@ npm install wxapp-api-interceptors --save
 
 ### 使用
 
-##### mpvue项目
+##### mpvue等项目
 
 ```js
 import wxApiInterceptors from 'wxapp-api-interceptors';
@@ -25,7 +25,7 @@ wxApiInterceptors(); // 必须在调用小程序api之前调用
 
 ##### 原生小程序项目
 
-下载该项目，解压移动文件夹`dist`里`wxApiInterceptors.js`到你自己的项目，详见[示例](https://github.com/mushan0x0/wxapp-api-interceptors/tree/master/example/wxapp)。
+[下载](https://github.com/mushan0x0/wxapp-api-interceptors/archive/master.zip)该项目，解压移动文件夹`dist`里`wxApiInterceptors.js`到你自己的项目，详见[示例](https://github.com/mushan0x0/wxapp-api-interceptors/tree/master/example/wxapp)。
 
 ```js
 const wxApiInterceptors = require('./wxApiInterceptors');
@@ -110,7 +110,7 @@ wx.request.post('https://test.com', {data: {userName: 'test'}})
 
 ## 当然也可以再继续拦截request api
 
-比如设置request api默认的host:
+比如设置request api默认的host：
 
 ```js
 wxApiInterceptors({
@@ -121,6 +121,23 @@ wxApiInterceptors({
                 params.url = host + params.url;
             }
             return params;
+        },
+    },
+});
+```
+
+甚至可以拦截自己的业务状态码：
+
+```js
+wxApiInterceptors({
+    request: {
+        response(res) {
+            const {data: {code}} = res;
+            // 如果data里的code等于-1就响应为失败
+            if (code === -1) {
+                return Promise.reject(res);
+            }
+            return res;
         },
     },
 });
