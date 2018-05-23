@@ -2,7 +2,7 @@
 
 - 小程序api全Promise化
 - 兼用小程序api的原本调用方式
-- 和axiox一样的请求方式
+- 和axios一样的请求方式
 - 小程序api自定义拦截调用参数和返回结果
 
 ## 快速开始
@@ -86,9 +86,9 @@ wx.showModal({title: '测试'})
 // 控制的输出：调用成功
 ```
 
-## 默认拦截了request api，封装成了和axiox差不多的使用方式
+## 默认拦截了request api，封装成了和axios差不多的使用方式
 
-调用`wx.request[method](url, [config])`发送axiox化的请求。
+调用`wx.request[method](url, [config])`发送axios化的请求。
 
 ##### 默认`GET`请求
 
