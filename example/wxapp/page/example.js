@@ -4,6 +4,6 @@ Page({
    */
   onLoad: function (options) {
       wx.showModal({title: '测试'})
-          .then(console.log);
+          .then(console.log)
   },
 });
