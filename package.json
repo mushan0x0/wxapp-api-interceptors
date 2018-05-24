@@ -1,6 +1,6 @@
 {
   "name": "wxapp-api-interceptors",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "微信小程序api拦截封装",
   "main": "./lib/index.js",
   "scripts": {

@@ -27,7 +27,7 @@ wxApiInterceptors(); // 必须在调用小程序api之前调用
 
 ##### 原生小程序项目
 
-[下载](https://github.com/mushan0x0/wxapp-api-interceptors/archive/master.zip)该项目，解压移动文件夹`dist`里`wxApiInterceptors.js`和`runtime`文件到你自己的项目，详见[示例](https://github.com/mushan0x0/wxapp-api-interceptors/tree/master/example/wxapp)。
+[下载](https://github.com/mushan0x0/wxapp-api-interceptors/archive/master.zip)该项目，解压移动文件夹`dist`里`wxApiInterceptors.js`和`runtime.js`文件到你自己的项目，详见[示例](https://github.com/mushan0x0/wxapp-api-interceptors/tree/master/example/wxapp)。
 
 ```js
 const wxApiInterceptors = require('./wxApiInterceptors');
@@ -178,3 +178,5 @@ wxApiInterceptors({
     },
 });
 ```
+
+原生小程序项目使用async需要特殊处理，请看[示例](https://github.com/mushan0x0/wxapp-api-interceptors/tree/master/example/wxapp)。
