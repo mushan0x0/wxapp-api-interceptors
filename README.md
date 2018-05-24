@@ -1,9 +1,11 @@
 # 微信小程序api拦截器
 
 - 小程序api全Promise化
-- 兼用小程序api的原本调用方式
 - 和axios一样的请求方式
 - 小程序api自定义拦截调用参数和返回结果
+- 强大的async拦截
+- 完美兼容原生小程序项目
+- 完美兼用小程序api的原本调用方式，无痛迁移
 
 ## 快速开始
 
@@ -35,26 +37,34 @@ wxApiInterceptors(); // 必须在调用小程序api之前调用
 
 ## 小程序api调用
 
-不必传success，和fail参数。
+不必传success、complete，和fail参数。
 
 ##### 函数式异步调用方式：
 
 ```js
-wx.login()
-    .then(wx.getUserInfo)
-    .then(({userInfo}) => {
-        this.setData({userInfo});
-    })
+wx.showLoading({title: '登录中...'})
+    .then(wx.login)
+    .then(data => wx.request.post('/login', {data}))
+    .then(() => wx.showToast({title: '登录成功'}))
+    .catch(() => wx.showToast({title: '登录失败'}))
+    .finally(wx.hideLoading);
 ```
 
-##### 也兼容原生的调用方式：
+##### 也兼容原生的调用方式（不便维护）：
 
 ```js
-wx.login({
+wx.showLoading({
+    title: '登录中...',
     success: () => {
-        wx.getUserInfo({
-            success: ({userInfo) => {
-                this.setData(userInfo);
+        wx.login({
+            success: (data) => {
+                wx.request({
+                    url: '/login',
+                    data,
+                    success: () => wx.showToast({title: '登录成功'}),
+                    fail: () => wx.showToast({title: '登录失败'}),
+                    complete: wx.hideLoading,
+                });
             },
         });
     },
@@ -138,6 +148,28 @@ wxApiInterceptors({
                 return Promise.reject(res);
             }
             return res;
+        },
+    },
+});
+```
+
+## async拦截器
+
+比如调用request api的时候都在header里带上token：
+
+```js
+wxApiInterceptors({
+    request: {
+        async request(params) {
+            if (params.header === undefined) {
+                params.header = {};
+            }
+            let token = await wx.getStorageSync('token');
+            if (!token) {
+                token = await wx.request('/getToken')
+            }
+            params.header.token = token;
+            return params;
         },
     },
 });
