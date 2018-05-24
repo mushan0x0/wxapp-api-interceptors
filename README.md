@@ -39,7 +39,7 @@ wxApiInterceptors(); // 必须在调用小程序api之前调用
 
 不必传success、complete和fail参数。
 
-##### ⚠️注意：原生小程序项目需要关闭es6转es5，同时也不支持Promise.finally
+##### ⚠️注意：原生小程序项目不支持Promise.finally
 
 ##### 函数式异步调用方式：
 

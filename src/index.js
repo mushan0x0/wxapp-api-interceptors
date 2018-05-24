@@ -41,12 +41,12 @@ export default (interceptors = {}) => {
     });
 
     wx.request = new Proxy(async (url, params = {}) => {
+        if (typeof url === 'object') {
+            params = url;
+            url = url.url;
+        }
         if (interceptors.request) {
             const {request: {request = obj => obj}} = interceptors;
-            if (typeof url === 'object') {
-                params = url;
-                url = url.url;
-            }
             try {
                 params = (await request({...params, url})) || params;
             } catch (e) {
