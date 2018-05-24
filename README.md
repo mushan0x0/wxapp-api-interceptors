@@ -1,11 +1,11 @@
 # 微信小程序api拦截器
 
+- 完美兼容原生小程序项目
+- 完美兼用小程序api的原本调用方式，无痛迁移
 - 小程序api全Promise化
 - 和axios一样的请求方式
 - 小程序api自定义拦截调用参数和返回结果
 - 强大的async拦截
-- 完美兼容原生小程序项目
-- 完美兼用小程序api的原本调用方式，无痛迁移
 
 ## 快速开始
 
@@ -91,6 +91,7 @@ wxApiInterceptors({
         },
     }
 });
+
 wx.showModal({title: '测试'})
     .then(console.log);
 // 控制的输出：调用成功
@@ -153,9 +154,9 @@ wxApiInterceptors({
 });
 ```
 
-## async拦截器
+## 强大的async拦截器
 
-比如调用request api的时候都在header里带上token：
+比如调用request api的时候都在header里带上本地储存的token，没有的话从服务器获取：
 
 ```js
 wxApiInterceptors({
@@ -166,7 +167,8 @@ wxApiInterceptors({
             }
             let token = await wx.getStorageSync('token');
             if (!token) {
-                token = await wx.request('/getToken')
+                ({data: token} = await wx.request('/getToken'));
+                wx.setStorageSync('token', token);
             }
             params.header.token = token;
             return params;
