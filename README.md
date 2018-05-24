@@ -165,7 +165,7 @@ wxApiInterceptors({
             if (params.header === undefined) {
                 params.header = {};
             }
-            let token = await wx.getStorageSync('token');
+            let token = wx.getStorageSync('token');
             if (!token) {
                 ({data: token} = await wx.request('/getToken'));
                 wx.setStorageSync('token', token);
