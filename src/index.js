@@ -7,7 +7,7 @@ export default (interceptors = {}) => {
                 return receiver.request;
             }
             return (...arg) => {
-                let [params] = arg;
+                let [params = {}] = arg;
                 if (typeof params === 'object') {
                     return new Promise(async (resolve, reject) => {
                         let resFn = (res, cb) => {

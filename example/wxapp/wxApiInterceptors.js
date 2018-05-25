@@ -25,7 +25,8 @@ module.exports = function () {
                     arg[_key] = arguments[_key];
                 }
 
-                var params = arg[0];
+                var _arg$ = arg[0],
+                    params = _arg$ === undefined ? {} : _arg$;
 
                 if ((typeof params === 'undefined' ? 'undefined' : _typeof(params)) === 'object') {
                     return new Promise(function () {
