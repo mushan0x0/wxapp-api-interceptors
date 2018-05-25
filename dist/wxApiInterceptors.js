@@ -1,12 +1,12 @@
 'use strict';
 
+var regeneratorRuntime = require('./runtime');
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var regeneratorRuntime = require('./runtime');
 
 module.exports = function () {
     var interceptors = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -20,129 +20,135 @@ module.exports = function () {
             if (name === 'request') {
                 return receiver.request;
             }
-            if (name.includes('Sync')) {
-                return oldWx[name];
-            }
             return function () {
-                var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-                return new Promise(function () {
-                    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(resolve, reject) {
-                        var resFn, _interceptors$name, _interceptors$name$re, request, _interceptors$name$re2, response, _params, _params$success, _success, _params$fail, _fail;
+                for (var _len = arguments.length, arg = Array(_len), _key = 0; _key < _len; _key++) {
+                    arg[_key] = arguments[_key];
+                }
 
-                        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                            while (1) {
-                                switch (_context2.prev = _context2.next) {
-                                    case 0:
-                                        resFn = function resFn(res, cb) {
-                                            cb(res);
-                                        };
+                var _arg$ = arg[0],
+                    params = _arg$ === undefined ? {} : _arg$;
 
-                                        if (!interceptors[name]) {
-                                            _context2.next = 16;
+                if ((typeof params === 'undefined' ? 'undefined' : _typeof(params)) === 'object') {
+                    return new Promise(function () {
+                        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(resolve, reject) {
+                            var resFn, _interceptors$name, _interceptors$name$re, request, _interceptors$name$re2, response, _params, _params$success, _success, _params$fail, _fail;
+
+                            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                                while (1) {
+                                    switch (_context2.prev = _context2.next) {
+                                        case 0:
+                                            resFn = function resFn(res, cb) {
+                                                cb(res);
+                                            };
+
+                                            if (!interceptors[name]) {
+                                                _context2.next = 16;
+                                                break;
+                                            }
+
+                                            _interceptors$name = interceptors[name], _interceptors$name$re = _interceptors$name.request, request = _interceptors$name$re === undefined ? function () {
+                                                return params;
+                                            } : _interceptors$name$re, _interceptors$name$re2 = _interceptors$name.response, response = _interceptors$name$re2 === undefined ? function (obj) {
+                                                return obj;
+                                            } : _interceptors$name$re2;
+                                            _context2.prev = 3;
+                                            _context2.next = 6;
+                                            return request(params);
+
+                                        case 6:
+                                            _context2.t0 = _context2.sent;
+
+                                            if (_context2.t0) {
+                                                _context2.next = 9;
+                                                break;
+                                            }
+
+                                            _context2.t0 = params;
+
+                                        case 9:
+                                            params = _context2.t0;
+                                            _context2.next = 15;
                                             break;
-                                        }
 
-                                        _interceptors$name = interceptors[name], _interceptors$name$re = _interceptors$name.request, request = _interceptors$name$re === undefined ? function () {
-                                            return params;
-                                        } : _interceptors$name$re, _interceptors$name$re2 = _interceptors$name.response, response = _interceptors$name$re2 === undefined ? function (obj) {
-                                            return obj;
-                                        } : _interceptors$name$re2;
-                                        _context2.prev = 3;
-                                        _context2.next = 6;
-                                        return request(params);
+                                        case 12:
+                                            _context2.prev = 12;
+                                            _context2.t1 = _context2['catch'](3);
+                                            throw console.error(_context2.t1);
 
-                                    case 6:
-                                        _context2.t0 = _context2.sent;
+                                        case 15:
+                                            resFn = function () {
+                                                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(res, cb) {
+                                                    return regeneratorRuntime.wrap(function _callee$(_context) {
+                                                        while (1) {
+                                                            switch (_context.prev = _context.next) {
+                                                                case 0:
+                                                                    _context.next = 2;
+                                                                    return response(res);
 
-                                        if (_context2.t0) {
-                                            _context2.next = 9;
-                                            break;
-                                        }
+                                                                case 2:
+                                                                    _context.t0 = _context.sent;
 
-                                        _context2.t0 = params;
+                                                                    if (_context.t0) {
+                                                                        _context.next = 5;
+                                                                        break;
+                                                                    }
 
-                                    case 9:
-                                        params = _context2.t0;
-                                        _context2.next = 15;
-                                        break;
+                                                                    _context.t0 = res;
 
-                                    case 12:
-                                        _context2.prev = 12;
-                                        _context2.t1 = _context2['catch'](3);
-                                        throw console.error(_context2.t1);
+                                                                case 5:
+                                                                    res = _context.t0;
 
-                                    case 15:
-                                        resFn = function () {
-                                            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(res, cb) {
-                                                return regeneratorRuntime.wrap(function _callee$(_context) {
-                                                    while (1) {
-                                                        switch (_context.prev = _context.next) {
-                                                            case 0:
-                                                                _context.next = 2;
-                                                                return response(res);
+                                                                    cb(res);
 
-                                                            case 2:
-                                                                _context.t0 = _context.sent;
-
-                                                                if (_context.t0) {
-                                                                    _context.next = 5;
-                                                                    break;
-                                                                }
-
-                                                                _context.t0 = res;
-
-                                                            case 5:
-                                                                res = _context.t0;
-
-                                                                cb(res);
-
-                                                            case 7:
-                                                            case 'end':
-                                                                return _context.stop();
+                                                                case 7:
+                                                                case 'end':
+                                                                    return _context.stop();
+                                                            }
                                                         }
-                                                    }
-                                                }, _callee, _this);
+                                                    }, _callee, _this);
+                                                }));
+
+                                                return function resFn(_x4, _x5) {
+                                                    return _ref2.apply(this, arguments);
+                                                };
+                                            }();
+
+                                        case 16:
+                                            _params = params, _params$success = _params.success, _success = _params$success === undefined ? function () {
+                                                return '';
+                                            } : _params$success, _params$fail = _params.fail, _fail = _params$fail === undefined ? function () {
+                                                return '';
+                                            } : _params$fail;
+
+                                            oldWx[name](Object.assign(params, {
+                                                success: function success(res) {
+                                                    return resFn(res, function (newRes) {
+                                                        resolve(newRes);
+                                                        _success(newRes);
+                                                    });
+                                                },
+                                                fail: function fail(res) {
+                                                    return resFn(res, function (newRes) {
+                                                        reject(newRes);
+                                                        _fail(newRes);
+                                                    });
+                                                }
                                             }));
 
-                                            return function resFn(_x5, _x6) {
-                                                return _ref2.apply(this, arguments);
-                                            };
-                                        }();
-
-                                    case 16:
-                                        _params = params, _params$success = _params.success, _success = _params$success === undefined ? function () {
-                                            return '';
-                                        } : _params$success, _params$fail = _params.fail, _fail = _params$fail === undefined ? function () {
-                                            return '';
-                                        } : _params$fail;
-
-                                        oldWx[name](Object.assign(params, {
-                                            success: function success(res) {
-                                                return resFn(res, function (newRes) {
-                                                    resolve(newRes);
-                                                    _success(newRes);
-                                                });
-                                            },
-                                            fail: function fail(res) {
-                                                return resFn(res, function (newRes) {
-                                                    reject(newRes);
-                                                    _fail(newRes);
-                                                });
-                                            }
-                                        }));
-
-                                    case 18:
-                                    case 'end':
-                                        return _context2.stop();
+                                        case 18:
+                                        case 'end':
+                                            return _context2.stop();
+                                    }
                                 }
-                            }
-                        }, _callee2, _this, [[3, 12]]);
-                    }));
+                            }, _callee2, _this, [[3, 12]]);
+                        }));
 
-                    return function (_x3, _x4) {
-                        return _ref.apply(this, arguments);
-                    };
-                }());
+                        return function (_x2, _x3) {
+                            return _ref.apply(this, arguments);
+                        };
+                    }());
+                }
+                return oldWx[name].apply(oldWx, arg);
             };
         }
     });
@@ -260,7 +266,7 @@ module.exports = function () {
                                         }, _callee3, this, [[4, 13]]);
                                     }));
 
-                                    return function resFn(_x9, _x10) {
+                                    return function resFn(_x8, _x9) {
                                         return _ref4.apply(this, arguments);
                                     };
                                 }();
@@ -289,7 +295,7 @@ module.exports = function () {
             }, _callee4, undefined, [[3, 12]]);
         }));
 
-        return function (_x7) {
+        return function (_x6) {
             return _ref3.apply(this, arguments);
         };
     }(), {

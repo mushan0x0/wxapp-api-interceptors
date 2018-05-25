@@ -6,37 +6,40 @@ export default (interceptors = {}) => {
             if (name === 'request') {
                 return receiver.request;
             }
-            if (name.includes('Sync')) {
-                return oldWx[name];
-            }
-            return (params = {}) => new Promise(async (resolve, reject) => {
-                let resFn = (res, cb) => {
-                    cb(res);
-                };
-                if (interceptors[name]) {
-                    const {request = () => params, response = obj => obj} = interceptors[name];
-                    try {
-                        params = (await request(params)) || params;
-                    } catch (e) {
-                        throw console.error(e);
-                    }
-                    resFn = async (res, cb) => {
-                        res = (await response(res)) || res;
-                        cb(res);
-                    };
+            return (...arg) => {
+                let [params = {}] = arg;
+                if (typeof params === 'object') {
+                    return new Promise(async (resolve, reject) => {
+                        let resFn = (res, cb) => {
+                            cb(res);
+                        };
+                        if (interceptors[name]) {
+                            const {request = () => params, response = obj => obj} = interceptors[name];
+                            try {
+                                params = (await request(params)) || params;
+                            } catch (e) {
+                                throw console.error(e);
+                            }
+                            resFn = async (res, cb) => {
+                                res = (await response(res)) || res;
+                                cb(res);
+                            };
+                        }
+                        const {success = () => '', fail = () => ''} = params;
+                        oldWx[name](Object.assign(params, {
+                            success: res => resFn(res, (newRes) => {
+                                resolve(newRes);
+                                success(newRes);
+                            }),
+                            fail: res => resFn(res, (newRes) => {
+                                reject(newRes);
+                                fail(newRes);
+                            }),
+                        }));
+                    });
                 }
-                const {success = () => '', fail = () => ''} = params;
-                oldWx[name](Object.assign(params, {
-                    success: res => resFn(res, (newRes) => {
-                        resolve(newRes);
-                        success(newRes);
-                    }),
-                    fail: res => resFn(res, (newRes) => {
-                        reject(newRes);
-                        fail(newRes);
-                    }),
-                }));
-            });
+                return oldWx[name](...arg);
+            };
         },
     });
 
