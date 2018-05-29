@@ -147,6 +147,14 @@ module.exports = function () {
                             return _ref.apply(this, arguments);
                         };
                     }());
+                } else if (interceptors[name]) {
+                    var _interceptors$name$re3 = interceptors[name].request,
+                        request = _interceptors$name$re3 === undefined ? function () {
+                            return params;
+                        } : _interceptors$name$re3;
+
+                    params = request(params) || params;
+                    return oldWx[name](params);
                 }
                 return oldWx[name].apply(oldWx, arg);
             };

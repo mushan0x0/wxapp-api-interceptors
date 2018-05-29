@@ -37,6 +37,10 @@ export default (interceptors = {}) => {
                             }),
                         }));
                     });
+                } else if (interceptors[name]) {
+                    const {request = () => params} = interceptors[name];
+                    params = request(params) || params;
+                    return oldWx[name](params);
                 }
                 return oldWx[name](...arg);
             };
