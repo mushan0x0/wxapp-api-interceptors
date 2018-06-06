@@ -8,36 +8,41 @@ export default (interceptors = {}) => {
             }
             return (...arg) => {
                 let [params = {}] = arg;
-                const handleInterceptors = () => new Promise(async (resolve, reject) => {
-                    const {success = () => '', fail = () => ''} = params;
+                const handleInterceptors = async (isAsync = false) => {
                     let resFn = (res, cb) => {
                         cb(res);
                     };
                     if (interceptors[name]) {
                         const {request = () => params, response = obj => obj} = interceptors[name];
                         try {
-                            params = (await request(params)) || params;
+                            params = (isAsync ? request(params) : (await request(params))) || params;
                         } catch (e) {
                             throw console.error(e);
                         }
                         resFn = async (res, cb) => {
-                            res = (await response(res)) || res;
+                            res = (isAsync ? response(res) : (await response(res))) || res;
                             cb(res);
                         };
                     }
-                    oldWx[name](Object.assign(params, {
-                        success: res => resFn(res, (newRes) => {
-                            resolve(newRes);
-                            success(newRes);
-                        }),
-                        fail: res => resFn(res, (newRes) => {
-                            reject(newRes);
-                            fail(newRes);
-                        }),
-                    }));
-                });
-                if ((typeof params === 'object' && oldWx.canIUse(`${name}.success`)) || interceptors[name]) {
-                    return handleInterceptors();
+                    return resFn;
+                };
+                if (interceptors[name] && !oldWx.canIUse(`${name}.success`)) {
+                    handleInterceptors(true);
+                } else if ((typeof params === 'object' && oldWx.canIUse(`${name}.success`)) || interceptors[name]) {
+                    return new Promise(async (resolve, reject) => {
+                        const {success = () => '', fail = () => ''} = params;
+                        const resFn = await handleInterceptors();
+                        oldWx[name](Object.assign(params, {
+                            success: res => resFn(res, (newRes) => {
+                                resolve(newRes);
+                                success(newRes);
+                            }),
+                            fail: res => resFn(res, (newRes) => {
+                                reject(newRes);
+                                fail(newRes);
+                            }),
+                        }));
+                    });
                 }
                 return oldWx[name](...arg);
             };
@@ -69,7 +74,7 @@ export default (interceptors = {}) => {
                         fail(e);
                     }
                 }
-                if (statusCode > 300 || statusCode < 200) {
+                if (statusCode >= 400) {
                     fail(res);
                     return;
                 }
