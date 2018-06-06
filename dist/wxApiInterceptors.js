@@ -28,21 +28,27 @@ module.exports = function () {
                 var _arg$ = arg[0],
                     params = _arg$ === undefined ? {} : _arg$;
 
-                if ((typeof params === 'undefined' ? 'undefined' : _typeof(params)) === 'object') {
+                var handleInterceptors = function handleInterceptors() {
                     return new Promise(function () {
                         var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(resolve, reject) {
-                            var resFn, _interceptors$name, _interceptors$name$re, request, _interceptors$name$re2, response, _params, _params$success, _success, _params$fail, _fail;
+                            var _params, _params$success, _success, _params$fail, _fail, resFn, _interceptors$name, _interceptors$name$re, request, _interceptors$name$re2, response;
 
                             return regeneratorRuntime.wrap(function _callee2$(_context2) {
                                 while (1) {
                                     switch (_context2.prev = _context2.next) {
                                         case 0:
+                                            _params = params, _params$success = _params.success, _success = _params$success === undefined ? function () {
+                                                return '';
+                                            } : _params$success, _params$fail = _params.fail, _fail = _params$fail === undefined ? function () {
+                                                return '';
+                                            } : _params$fail;
+
                                             resFn = function resFn(res, cb) {
                                                 cb(res);
                                             };
 
                                             if (!interceptors[name]) {
-                                                _context2.next = 16;
+                                                _context2.next = 17;
                                                 break;
                                             }
 
@@ -51,31 +57,31 @@ module.exports = function () {
                                             } : _interceptors$name$re, _interceptors$name$re2 = _interceptors$name.response, response = _interceptors$name$re2 === undefined ? function (obj) {
                                                 return obj;
                                             } : _interceptors$name$re2;
-                                            _context2.prev = 3;
-                                            _context2.next = 6;
+                                            _context2.prev = 4;
+                                            _context2.next = 7;
                                             return request(params);
 
-                                        case 6:
+                                        case 7:
                                             _context2.t0 = _context2.sent;
 
                                             if (_context2.t0) {
-                                                _context2.next = 9;
+                                                _context2.next = 10;
                                                 break;
                                             }
 
                                             _context2.t0 = params;
 
-                                        case 9:
+                                        case 10:
                                             params = _context2.t0;
-                                            _context2.next = 15;
+                                            _context2.next = 16;
                                             break;
 
-                                        case 12:
-                                            _context2.prev = 12;
-                                            _context2.t1 = _context2['catch'](3);
+                                        case 13:
+                                            _context2.prev = 13;
+                                            _context2.t1 = _context2['catch'](4);
                                             throw console.error(_context2.t1);
 
-                                        case 15:
+                                        case 16:
                                             resFn = function () {
                                                 var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(res, cb) {
                                                     return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -113,13 +119,7 @@ module.exports = function () {
                                                 };
                                             }();
 
-                                        case 16:
-                                            _params = params, _params$success = _params.success, _success = _params$success === undefined ? function () {
-                                                return '';
-                                            } : _params$success, _params$fail = _params.fail, _fail = _params$fail === undefined ? function () {
-                                                return '';
-                                            } : _params$fail;
-
+                                        case 17:
                                             oldWx[name](Object.assign(params, {
                                                 success: function success(res) {
                                                     return resFn(res, function (newRes) {
@@ -140,21 +140,16 @@ module.exports = function () {
                                             return _context2.stop();
                                     }
                                 }
-                            }, _callee2, _this, [[3, 12]]);
+                            }, _callee2, _this, [[4, 13]]);
                         }));
 
                         return function (_x2, _x3) {
                             return _ref.apply(this, arguments);
                         };
                     }());
-                } else if (interceptors[name]) {
-                    var _interceptors$name$re3 = interceptors[name].request,
-                        request = _interceptors$name$re3 === undefined ? function () {
-                            return params;
-                        } : _interceptors$name$re3;
-
-                    params = request(params) || params;
-                    return oldWx[name](params);
+                };
+                if ((typeof params === 'undefined' ? 'undefined' : _typeof(params)) === 'object' && oldWx.canIUse(name + '.success') || interceptors[name]) {
+                    return handleInterceptors();
                 }
                 return oldWx[name].apply(oldWx, arg);
             };
@@ -212,66 +207,65 @@ module.exports = function () {
                             return _context4.abrupt('return', new Promise(function (resolve, reject) {
                                 var resFn = function () {
                                     var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(res, cb) {
-                                        var _res, statusCode, firstCode, _interceptors$request2, response;
+                                        var _res, statusCode, _interceptors$request2, response;
 
                                         return regeneratorRuntime.wrap(function _callee3$(_context3) {
                                             while (1) {
                                                 switch (_context3.prev = _context3.next) {
                                                     case 0:
                                                         _res = res, statusCode = _res.statusCode;
-                                                        firstCode = +statusCode.toString().split('')[0];
 
                                                         if (!interceptors.request) {
-                                                            _context3.next = 16;
+                                                            _context3.next = 15;
                                                             break;
                                                         }
 
                                                         _interceptors$request2 = interceptors.request.response, response = _interceptors$request2 === undefined ? function () {
                                                             return res;
                                                         } : _interceptors$request2;
-                                                        _context3.prev = 4;
-                                                        _context3.next = 7;
+                                                        _context3.prev = 3;
+                                                        _context3.next = 6;
                                                         return response(res);
 
-                                                    case 7:
+                                                    case 6:
                                                         _context3.t0 = _context3.sent;
 
                                                         if (_context3.t0) {
-                                                            _context3.next = 10;
+                                                            _context3.next = 9;
                                                             break;
                                                         }
 
                                                         _context3.t0 = res;
 
-                                                    case 10:
+                                                    case 9:
                                                         res = _context3.t0;
-                                                        _context3.next = 16;
+                                                        _context3.next = 15;
                                                         break;
 
-                                                    case 13:
-                                                        _context3.prev = 13;
-                                                        _context3.t1 = _context3['catch'](4);
+                                                    case 12:
+                                                        _context3.prev = 12;
+                                                        _context3.t1 = _context3['catch'](3);
 
                                                         _fail2(_context3.t1);
 
-                                                    case 16:
-                                                        if (!(firstCode !== 2)) {
-                                                            _context3.next = 19;
+                                                    case 15:
+                                                        if (!(statusCode > 300 || statusCode < 200)) {
+                                                            _context3.next = 18;
                                                             break;
                                                         }
 
                                                         _fail2(res);
                                                         return _context3.abrupt('return');
 
-                                                    case 19:
+                                                    case 18:
                                                         cb(res);
 
-                                                    case 20:
+                                                    case 19:
                                                     case 'end':
                                                         return _context3.stop();
                                                 }
                                             }
-                                        }, _callee3, this, [[4, 13]]);
+                                        }, _callee3, this, [[3, 12]]);
                                     }));
 
                                     return function resFn(_x8, _x9) {
