@@ -29,13 +29,19 @@ export default (interceptors = {}) => {
                     }
                     return resFn;
                 };
-                if (interceptors[name] && (!oldWx.canIUse(`${name}.success`) && name !== 'showLoading')) {
+                const isAsync = (
+                    (
+                        oldWx.canIUse(`${name}.success`)
+                        || (
+                            !oldWx.canIUse(`${name}.return`) && oldWx.canIUse(`${name}.object`)
+                        )
+                    )
+                    || interceptors[name]
+                );
+                if (interceptors[name] && !isAsync) {
                     handleIntercept(true);
                     arg[0] = params;
-                } else if (
-                    (oldWx.canIUse(`${name}.success` || name === 'showLoading'))
-                    || interceptors[name]
-                ) {
+                } else if (isAsync || interceptors[name]) {
                     return new Promise(async (resolve, reject) => {
                         const {success = () => '', fail = () => ''} = params;
                         const resFn = await handleIntercept();

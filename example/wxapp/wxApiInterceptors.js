@@ -2,4 +2,391 @@
 
 var regeneratorRuntime = require('./runtime');
 
-var _typeof='function'==typeof Symbol&&'symbol'==typeof Symbol.iterator?function(a){return typeof a}:function(a){return a&&'function'==typeof Symbol&&a.constructor===Symbol&&a!==Symbol.prototype?'symbol':typeof a},_extends=Object.assign||function(a){for(var c,b=1;b<arguments.length;b++)for(var d in c=arguments[b],c)Object.prototype.hasOwnProperty.call(c,d)&&(a[d]=c[d]);return a};function _asyncToGenerator(a){return function(){var b=a.apply(this,arguments);return new Promise(function(c,d){function f(g,h){try{var j=b[g](h),k=j.value}catch(l){return void d(l)}return j.done?void c(k):Promise.resolve(k).then(function(l){f('next',l)},function(l){f('throw',l)})}return f('next')})}}module.exports=function(){var a=0<arguments.length&&arguments[0]!==void 0?arguments[0]:{},b=_extends({},wx);wx=new Proxy({},{get:function get(c,d){var f=this;return'request'===d?c.request:'old'===d?b:function(){for(var h=arguments.length,g=Array(h),j=0;j<h;j++)g[j]=arguments[j];var _arg$=g[0],k=_arg$===void 0?{}:_arg$,l=function(){var m=_asyncToGenerator(regeneratorRuntime.mark(function n(){var u=0<arguments.length&&arguments[0]!==void 0&&arguments[0],o,p,q,r,s,t;return regeneratorRuntime.wrap(function(w){for(;;)switch(w.prev=w.next){case 0:if(o=function resFn(x,y){y(x)},!a[d]){w.next=21;break}if(p=a[d],q=p.request,r=void 0===q?function(){return k}:q,s=p.response,t=void 0===s?function(x){return x}:s,w.prev=3,!u){w.next=8;break}w.t1=r(k),w.next=11;break;case 8:return w.next=10,r(k);case 10:w.t1=w.sent;case 11:if(w.t0=w.t1,w.t0){w.next=14;break}w.t0=k;case 14:k=w.t0,w.next=20;break;case 17:throw w.prev=17,w.t2=w['catch'](3),console.error(w.t2);case 20:o=function(){var x=_asyncToGenerator(regeneratorRuntime.mark(function y(z,A){return regeneratorRuntime.wrap(function(C){for(;;)switch(C.prev=C.next){case 0:if(!u){C.next=4;break}C.t1=t(z),C.next=7;break;case 4:return C.next=6,t(z);case 6:C.t1=C.sent;case 7:if(C.t0=C.t1,C.t0){C.next=10;break}C.t0=z;case 10:z=C.t0,A(z);case 12:case'end':return C.stop();}},y,f)}));return function resFn(){return x.apply(this,arguments)}}();case 21:return w.abrupt('return',o);case 22:case'end':return w.stop();}},n,f,[[3,17]])}));return function(){return m.apply(this,arguments)}}();if(a[d]&&!b.canIUse(d+'.success')&&'showLoading'!==d)l(!0),g[0]=k;else if(b.canIUse(d+'.success'||'showLoading'===d)||a[d])return new Promise(function(){var m=_asyncToGenerator(regeneratorRuntime.mark(function n(o,p){var q,r,s,t,u,v;return regeneratorRuntime.wrap(function(x){for(;;)switch(x.prev=x.next){case 0:return q=k,r=q.success,s=void 0===r?function(){return''}:r,t=q.fail,u=void 0===t?function(){return''}:t,x.next=3,l();case 3:v=x.sent,b[d](Object.assign(k,{success:function success(y){return v(y,function(z){o(z),s(z)})},fail:function fail(y){return v(y,function(z){p(z),u(z)})}}));case 5:case'end':return x.stop();}},n,f)}));return function(){return m.apply(this,arguments)}}());return b[d].apply(b,g)}}}),wx.request=new Proxy(function(){var c=_asyncToGenerator(regeneratorRuntime.mark(function d(f){var j=1<arguments.length&&arguments[1]!==void 0?arguments[1]:{},g,h;return regeneratorRuntime.wrap(function(l){for(;;)switch(l.prev=l.next){case 0:if('object'===('undefined'==typeof f?'undefined':_typeof(f))?(j=f,f=f.url):j.url=f,!a.request){l.next=15;break}return g=a.request.request,h=void 0===g?function(m){return m}:g,l.prev=3,l.next=6,h(_extends({},j,{url:f}));case 6:if(l.t0=l.sent,l.t0){l.next=9;break}l.t0=j;case 9:j=l.t0,l.next=15;break;case 12:throw l.prev=12,l.t1=l['catch'](3),console.error(l.t1);case 15:return l.abrupt('return',new Promise(function(m,n){var t=function(){var u=_asyncToGenerator(regeneratorRuntime.mark(function v(w,x){var y,z,A,B;return regeneratorRuntime.wrap(function(D){for(;;)switch(D.prev=D.next){case 0:if(y=w,z=y.statusCode,!a.request){D.next=16;break}return A=a.request.response,B=void 0===A?function(){return w}:A,D.prev=3,D.next=6,B(w);case 6:if(D.t0=D.sent,D.t0){D.next=9;break}D.t0=w;case 9:w=D.t0,D.next=16;break;case 12:D.prev=12,D.t1=D['catch'](3),n(D.t1),s(D.t1);case 16:if(!(400<=z)){D.next=20;break}return n(w),s(w),D.abrupt('return');case 20:x(w);case 21:case'end':return D.stop();}},v,this,[[3,12]])}));return function(){return u.apply(this,arguments)}}(),o=j,p=o.success,q=void 0===p?function(){return''}:p,r=o.fail,s=void 0===r?function(){return''}:r;b.request(Object.assign(j,{success:function success(u){return t(u,function(v){q(v),m(v)})},fail:function fail(u){return t(u,function(v){s(v),n(v)})}}))}));case 16:case'end':return l.stop();}},d,void 0,[[3,12]])}));return function(){return c.apply(this,arguments)}}(),{get:function get(c,d){return function(f){var g=1<arguments.length&&void 0!==arguments[1]?arguments[1]:{};return g.success||g.fail?b.request(g):(Object.assign(g,{method:d}),wx.request(f,g))}}})};
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+module.exports = function () {
+    var interceptors = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    var oldWx = _extends({}, wx);
+
+    wx = new Proxy({}, {
+        get: function get(receiver, name) {
+            var _this = this;
+
+            if (name === 'request') {
+                return receiver.request;
+            }
+            if (name === 'old') {
+                return oldWx;
+            }
+            return function () {
+                for (var _len = arguments.length, arg = Array(_len), _key = 0; _key < _len; _key++) {
+                    arg[_key] = arguments[_key];
+                }
+
+                var _arg$ = arg[0],
+                    params = _arg$ === undefined ? {} : _arg$;
+
+                var handleIntercept = function () {
+                    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                        var isAsync = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+                        var resFn, _interceptors$name, _interceptors$name$re, request, _interceptors$name$re2, response;
+
+                        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                            while (1) {
+                                switch (_context2.prev = _context2.next) {
+                                    case 0:
+                                        resFn = function resFn(res, cb) {
+                                            cb(res);
+                                        };
+
+                                        if (!interceptors[name]) {
+                                            _context2.next = 21;
+                                            break;
+                                        }
+
+                                        _interceptors$name = interceptors[name], _interceptors$name$re = _interceptors$name.request, request = _interceptors$name$re === undefined ? function () {
+                                            return params;
+                                        } : _interceptors$name$re, _interceptors$name$re2 = _interceptors$name.response, response = _interceptors$name$re2 === undefined ? function (obj) {
+                                            return obj;
+                                        } : _interceptors$name$re2;
+                                        _context2.prev = 3;
+
+                                        if (!isAsync) {
+                                            _context2.next = 8;
+                                            break;
+                                        }
+
+                                        _context2.t1 = request(params);
+                                        _context2.next = 11;
+                                        break;
+
+                                    case 8:
+                                        _context2.next = 10;
+                                        return request(params);
+
+                                    case 10:
+                                        _context2.t1 = _context2.sent;
+
+                                    case 11:
+                                        _context2.t0 = _context2.t1;
+
+                                        if (_context2.t0) {
+                                            _context2.next = 14;
+                                            break;
+                                        }
+
+                                        _context2.t0 = params;
+
+                                    case 14:
+                                        params = _context2.t0;
+                                        _context2.next = 20;
+                                        break;
+
+                                    case 17:
+                                        _context2.prev = 17;
+                                        _context2.t2 = _context2['catch'](3);
+                                        throw console.error(_context2.t2);
+
+                                    case 20:
+                                        resFn = function () {
+                                            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(res, cb) {
+                                                return regeneratorRuntime.wrap(function _callee$(_context) {
+                                                    while (1) {
+                                                        switch (_context.prev = _context.next) {
+                                                            case 0:
+                                                                if (!isAsync) {
+                                                                    _context.next = 4;
+                                                                    break;
+                                                                }
+
+                                                                _context.t1 = response(res);
+                                                                _context.next = 7;
+                                                                break;
+
+                                                            case 4:
+                                                                _context.next = 6;
+                                                                return response(res);
+
+                                                            case 6:
+                                                                _context.t1 = _context.sent;
+
+                                                            case 7:
+                                                                _context.t0 = _context.t1;
+
+                                                                if (_context.t0) {
+                                                                    _context.next = 10;
+                                                                    break;
+                                                                }
+
+                                                                _context.t0 = res;
+
+                                                            case 10:
+                                                                res = _context.t0;
+
+                                                                cb(res);
+
+                                                            case 12:
+                                                            case 'end':
+                                                                return _context.stop();
+                                                        }
+                                                    }
+                                                }, _callee, _this);
+                                            }));
+
+                                            return function resFn(_x3, _x4) {
+                                                return _ref2.apply(this, arguments);
+                                            };
+                                        }();
+
+                                    case 21:
+                                        return _context2.abrupt('return', resFn);
+
+                                    case 22:
+                                    case 'end':
+                                        return _context2.stop();
+                                }
+                            }
+                        }, _callee2, _this, [[3, 17]]);
+                    }));
+
+                    return function handleIntercept() {
+                        return _ref.apply(this, arguments);
+                    };
+                }();
+                var isAsync = oldWx.canIUse(name + '.success') || !oldWx.canIUse(name + '.return') && oldWx.canIUse(name + '.object') || interceptors[name];
+                if (interceptors[name] && !isAsync) {
+                    handleIntercept(true);
+                    arg[0] = params;
+                } else if (isAsync || interceptors[name]) {
+                    return new Promise(function () {
+                        var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(resolve, reject) {
+                            var _params, _params$success, _success, _params$fail, _fail, resFn;
+
+                            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                                while (1) {
+                                    switch (_context3.prev = _context3.next) {
+                                        case 0:
+                                            _params = params, _params$success = _params.success, _success = _params$success === undefined ? function () {
+                                                return '';
+                                            } : _params$success, _params$fail = _params.fail, _fail = _params$fail === undefined ? function () {
+                                                return '';
+                                            } : _params$fail;
+                                            _context3.next = 3;
+                                            return handleIntercept();
+
+                                        case 3:
+                                            resFn = _context3.sent;
+
+                                            oldWx[name](Object.assign(params, {
+                                                success: function success(res) {
+                                                    return resFn(res, function (newRes) {
+                                                        resolve(newRes);
+                                                        _success(newRes);
+                                                    });
+                                                },
+                                                fail: function fail(res) {
+                                                    return resFn(res, function (newRes) {
+                                                        reject(newRes);
+                                                        _fail(newRes);
+                                                    });
+                                                }
+                                            }));
+
+                                        case 5:
+                                        case 'end':
+                                            return _context3.stop();
+                                    }
+                                }
+                            }, _callee3, _this);
+                        }));
+
+                        return function (_x5, _x6) {
+                            return _ref3.apply(this, arguments);
+                        };
+                    }());
+                }
+                return oldWx[name].apply(oldWx, arg);
+            };
+        }
+    });
+
+    wx.request = new Proxy(function () {
+        var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(url) {
+            var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+            var _interceptors$request, request;
+
+            return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                while (1) {
+                    switch (_context5.prev = _context5.next) {
+                        case 0:
+                            if ((typeof url === 'undefined' ? 'undefined' : _typeof(url)) === 'object') {
+                                params = url;
+                                url = url.url;
+                            } else {
+                                params.url = url;
+                            }
+
+                            if (!interceptors.request) {
+                                _context5.next = 15;
+                                break;
+                            }
+
+                            _interceptors$request = interceptors.request.request, request = _interceptors$request === undefined ? function (obj) {
+                                return obj;
+                            } : _interceptors$request;
+                            _context5.prev = 3;
+                            _context5.next = 6;
+                            return request(_extends({}, params, { url: url }));
+
+                        case 6:
+                            _context5.t0 = _context5.sent;
+
+                            if (_context5.t0) {
+                                _context5.next = 9;
+                                break;
+                            }
+
+                            _context5.t0 = params;
+
+                        case 9:
+                            params = _context5.t0;
+                            _context5.next = 15;
+                            break;
+
+                        case 12:
+                            _context5.prev = 12;
+                            _context5.t1 = _context5['catch'](3);
+                            throw console.error(_context5.t1);
+
+                        case 15:
+                            return _context5.abrupt('return', new Promise(function (resolve, reject) {
+                                var resFn = function () {
+                                    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(res, cb) {
+                                        var _res, statusCode, _interceptors$request2, response;
+
+                                        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                                            while (1) {
+                                                switch (_context4.prev = _context4.next) {
+                                                    case 0:
+                                                        _res = res, statusCode = _res.statusCode;
+
+                                                        if (!interceptors.request) {
+                                                            _context4.next = 16;
+                                                            break;
+                                                        }
+
+                                                        _interceptors$request2 = interceptors.request.response, response = _interceptors$request2 === undefined ? function () {
+                                                            return res;
+                                                        } : _interceptors$request2;
+                                                        _context4.prev = 3;
+                                                        _context4.next = 6;
+                                                        return response(res);
+
+                                                    case 6:
+                                                        _context4.t0 = _context4.sent;
+
+                                                        if (_context4.t0) {
+                                                            _context4.next = 9;
+                                                            break;
+                                                        }
+
+                                                        _context4.t0 = res;
+
+                                                    case 9:
+                                                        res = _context4.t0;
+                                                        _context4.next = 16;
+                                                        break;
+
+                                                    case 12:
+                                                        _context4.prev = 12;
+                                                        _context4.t1 = _context4['catch'](3);
+
+                                                        reject(_context4.t1);
+                                                        _fail2(_context4.t1);
+
+                                                    case 16:
+                                                        if (!(statusCode >= 400)) {
+                                                            _context4.next = 20;
+                                                            break;
+                                                        }
+
+                                                        reject(res);
+                                                        _fail2(res);
+                                                        return _context4.abrupt('return');
+
+                                                    case 20:
+                                                        cb(res);
+
+                                                    case 21:
+                                                    case 'end':
+                                                        return _context4.stop();
+                                                }
+                                            }
+                                        }, _callee4, this, [[3, 12]]);
+                                    }));
+
+                                    return function resFn(_x9, _x10) {
+                                        return _ref5.apply(this, arguments);
+                                    };
+                                }();
+
+                                var _params2 = params,
+                                    _params2$success = _params2.success,
+                                    _success2 = _params2$success === undefined ? function () {
+                                        return '';
+                                    } : _params2$success,
+                                    _params2$fail = _params2.fail,
+                                    _fail2 = _params2$fail === undefined ? function () {
+                                        return '';
+                                    } : _params2$fail;
+
+                                oldWx.request(Object.assign(params, {
+                                    success: function success(res) {
+                                        return resFn(res, function (newRes) {
+                                            _success2(newRes);
+                                            resolve(newRes);
+                                        });
+                                    },
+                                    fail: function fail(res) {
+                                        return resFn(res, function (newRes) {
+                                            _fail2(newRes);
+                                            reject(newRes);
+                                        });
+                                    }
+                                }));
+                            }));
+
+                        case 16:
+                        case 'end':
+                            return _context5.stop();
+                    }
+                }
+            }, _callee5, undefined, [[3, 12]]);
+        }));
+
+        return function (_x7) {
+            return _ref4.apply(this, arguments);
+        };
+    }(), {
+        get: function get(receiver, method) {
+            return function (url) {
+                var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+                if (params.success || params.fail) {
+                    return oldWx.request(params);
+                }
+                Object.assign(params, {
+                    method: method
+                });
+                return wx.request(url, params);
+            };
+        }
+    });
+};
