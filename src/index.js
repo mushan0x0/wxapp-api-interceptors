@@ -60,6 +60,8 @@ export default (interceptors = {}) => {
         if (typeof url === 'object') {
             params = url;
             url = url.url;
+        } else {
+            params.url = url;
         }
         if (interceptors.request) {
             const {request: {request = obj => obj}} = interceptors;
