@@ -8,7 +8,7 @@ export default (interceptors = {}) => {
             }
             return (...arg) => {
                 let [params = {}] = arg;
-                const handleInterceptors = async (isAsync = false) => {
+                const handleIntercept = async (isAsync = false) => {
                     let resFn = (res, cb) => {
                         cb(res);
                     };
@@ -27,11 +27,12 @@ export default (interceptors = {}) => {
                     return resFn;
                 };
                 if (interceptors[name] && !oldWx.canIUse(`${name}.success`)) {
-                    handleInterceptors(true);
+                    handleIntercept(true);
+                    arg[0] = params;
                 } else if ((typeof params === 'object' && oldWx.canIUse(`${name}.success`)) || interceptors[name]) {
                     return new Promise(async (resolve, reject) => {
                         const {success = () => '', fail = () => ''} = params;
-                        const resFn = await handleInterceptors();
+                        const resFn = await handleIntercept();
                         oldWx[name](Object.assign(params, {
                             success: res => resFn(res, (newRes) => {
                                 resolve(newRes);
@@ -63,7 +64,7 @@ export default (interceptors = {}) => {
             }
         }
         return new Promise((resolve, reject) => {
-            const {success = resolve, fail = reject} = params;
+            const {success = () => '', fail = () => ''} = params;
             async function resFn(res, cb) {
                 const {statusCode} = res;
                 if (interceptors.request) {
@@ -81,8 +82,14 @@ export default (interceptors = {}) => {
                 cb(res);
             }
             oldWx.request(Object.assign(params, {
-                success: res => resFn(res, success),
-                fail: res => resFn(res, fail),
+                success: res => resFn(res, (newRes) => {
+                    success(newRes);
+                    resolve(newRes);
+                }),
+                fail: res => resFn(res, (newRes) => {
+                    fail(newRes);
+                    reject(newRes);
+                }),
             }));
         });
     }, {
