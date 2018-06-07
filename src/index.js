@@ -6,6 +6,9 @@ export default (interceptors = {}) => {
             if (name === 'request') {
                 return receiver.request;
             }
+            if (name === 'old') {
+                return oldWx;
+            }
             return (...arg) => {
                 let [params = {}] = arg;
                 const handleIntercept = async (isAsync = false) => {
@@ -26,10 +29,13 @@ export default (interceptors = {}) => {
                     }
                     return resFn;
                 };
-                if (interceptors[name] && !oldWx.canIUse(`${name}.success`)) {
+                if (interceptors[name] && (!oldWx.canIUse(`${name}.success`) && name !== 'showLoading')) {
                     handleIntercept(true);
                     arg[0] = params;
-                } else if ((typeof params === 'object' && oldWx.canIUse(`${name}.success`)) || interceptors[name]) {
+                } else if (
+                    (oldWx.canIUse(`${name}.success` || name === 'showLoading'))
+                    || interceptors[name]
+                ) {
                     return new Promise(async (resolve, reject) => {
                         const {success = () => '', fail = () => ''} = params;
                         const resFn = await handleIntercept();
@@ -72,10 +78,12 @@ export default (interceptors = {}) => {
                     try {
                         res = (await response(res)) || res;
                     } catch (e) {
+                        reject(e);
                         fail(e);
                     }
                 }
                 if (statusCode >= 400) {
+                    reject(res);
                     fail(res);
                     return;
                 }
