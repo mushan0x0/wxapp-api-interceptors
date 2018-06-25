@@ -1,6 +1,13 @@
+if (!Promise.prototype.finally) {
+    Promise.prototype.finally = function (callback) {
+        return this.then(
+            value => this.constructor.resolve(callback()).then(() => value),
+            reason => this.constructor.resolve(callback()).then(() => { throw reason; }),
+        );
+    };
+}
 export default (interceptors = {}) => {
     const oldWx = {...wx};
-
     wx = new Proxy({}, {
         get(receiver, name) {
             if (name === 'request') {

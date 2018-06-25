@@ -6,7 +6,10 @@ Page({
    */
   async onLoad(options) {
       await wx.showModal({title: '测试'})
-          .then(console.log);
+          .then(console.log)
+          .finally(() => {
+              console.log('finally')
+          });
       console.log('结束');
   },
 });

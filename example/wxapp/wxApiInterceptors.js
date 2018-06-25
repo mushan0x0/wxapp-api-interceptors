@@ -8,14 +8,28 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+if (!Promise.prototype.finally) {
+    Promise.prototype.finally = function (callback) {
+        var _this = this;
+
+        return this.then(function (value) {
+            return _this.constructor.resolve(callback()).then(function () {
+                return value;
+            });
+        }, function (reason) {
+            return _this.constructor.resolve(callback()).then(function () {
+                throw reason;
+            });
+        });
+    };
+}
 module.exports = function () {
     var interceptors = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     var oldWx = _extends({}, wx);
-
     wx = new Proxy({}, {
         get: function get(receiver, name) {
-            var _this = this;
+            var _this2 = this;
 
             if (name === 'request') {
                 return receiver.request;
@@ -136,7 +150,7 @@ module.exports = function () {
                                                                 return _context.stop();
                                                         }
                                                     }
-                                                }, _callee, _this);
+                                                }, _callee, _this2);
                                             }));
 
                                             return function resFn(_x3, _x4) {
@@ -152,7 +166,7 @@ module.exports = function () {
                                         return _context2.stop();
                                 }
                             }
-                        }, _callee2, _this, [[3, 17]]);
+                        }, _callee2, _this2, [[3, 17]]);
                     }));
 
                     return function handleIntercept() {
@@ -203,7 +217,7 @@ module.exports = function () {
                                             return _context3.stop();
                                     }
                                 }
-                            }, _callee3, _this);
+                            }, _callee3, _this2);
                         }));
 
                         return function (_x5, _x6) {
