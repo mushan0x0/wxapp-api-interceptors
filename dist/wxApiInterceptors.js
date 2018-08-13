@@ -173,7 +173,7 @@ module.exports = function () {
                         return _ref.apply(this, arguments);
                     };
                 }();
-                var isAsync = oldWx.canIUse(name + '.success') || !oldWx.canIUse(name + '.return') && oldWx.canIUse(name + '.object') || interceptors[name];
+                var isAsync = oldWx.canIUse(name + '.success') || !oldWx.canIUse(name + '.return') && oldWx.canIUse(name + '.object') && oldWx.canIUse(name + '.callback') || name === 'checkSession' || interceptors[name];
                 if (interceptors[name] && !isAsync) {
                     handleIntercept(true);
                     arg[0] = params;

@@ -1,10 +1,9 @@
+/* eslint-disable no-extend-native */
 if (!Promise.prototype.finally) {
-    Promise.prototype.finally = function (callback) {
-        return this.then(
-            value => this.constructor.resolve(callback()).then(() => value),
-            reason => this.constructor.resolve(callback()).then(() => { throw reason; }),
-        );
-    };
+    Promise.prototype.finally = callback => this.then(
+        value => this.constructor.resolve(callback()).then(() => value),
+        reason => this.constructor.resolve(callback()).then(() => { throw reason; }),
+    );
 }
 export default (interceptors = {}) => {
     const oldWx = {...wx};
@@ -40,8 +39,9 @@ export default (interceptors = {}) => {
                     (
                         oldWx.canIUse(`${name}.success`)
                         || (
-                            !oldWx.canIUse(`${name}.return`) && oldWx.canIUse(`${name}.object`)
+                            !oldWx.canIUse(`${name}.return`) && oldWx.canIUse(`${name}.object`) && oldWx.canIUse(`${name}.callback`)
                         )
+                        || name === 'checkSession'
                     )
                     || interceptors[name]
                 );

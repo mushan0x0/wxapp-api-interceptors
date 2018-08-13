@@ -11,5 +11,7 @@ Page({
               console.log('finally')
           });
       console.log('结束');
+      console.log(wx.createAnimation());
+      wx.checkSession().then(console.log);
   },
 });
