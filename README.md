@@ -25,7 +25,7 @@ import wxApiInterceptors from 'wxapp-api-interceptors';
 wxApiInterceptors(); // 必须在调用小程序api之前调用
 ```
 
-##### 原生小程序项目
+##### 原生小程序和taro项目
 
 [下载](https://github.com/mushan0x0/wxapp-api-interceptors/archive/master.zip)该项目，解压移动文件夹`dist`里`wxApiInterceptors.js`和`runtime.js`文件到你自己的项目，详见[示例](https://github.com/mushan0x0/wxapp-api-interceptors/tree/master/example/wxapp)。
 
