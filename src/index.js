@@ -5,9 +5,9 @@ if (!Promise.prototype.finally) {
         reason => this.constructor.resolve(callback()).then(() => { throw reason; }),
     );
 }
-export default (interceptors = {}) => {
+export default (interceptors = {}, isReturn = false) => {
     const oldWx = {...wx};
-    wx = new Proxy({}, {
+    const newWx = new Proxy({}, {
         get(receiver, name) {
             if (name === 'request') {
                 return receiver.request;
@@ -69,7 +69,7 @@ export default (interceptors = {}) => {
         },
     });
 
-    wx.request = new Proxy(async (url, params = {}) => {
+    newWx.request = new Proxy(async (url, params = {}) => {
         if (typeof url === 'object') {
             params = url;
             url = url.url;
@@ -128,4 +128,10 @@ export default (interceptors = {}) => {
             };
         },
     });
+
+    if (isReturn) {
+        return newWx;
+    } else {
+        wx = newWx;
+    }
 };

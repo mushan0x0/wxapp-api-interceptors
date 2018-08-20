@@ -25,9 +25,10 @@ if (!Promise.prototype.finally) {
 }
 module.exports = function () {
     var interceptors = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var isReturn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
     var oldWx = _extends({}, wx);
-    wx = new Proxy({}, {
+    var newWx = new Proxy({}, {
         get: function get(receiver, name) {
             var _this2 = this;
 
@@ -153,7 +154,7 @@ module.exports = function () {
                                                 }, _callee, _this2);
                                             }));
 
-                                            return function resFn(_x3, _x4) {
+                                            return function resFn(_x4, _x5) {
                                                 return _ref2.apply(this, arguments);
                                             };
                                         }();
@@ -220,7 +221,7 @@ module.exports = function () {
                             }, _callee3, _this2);
                         }));
 
-                        return function (_x5, _x6) {
+                        return function (_x6, _x7) {
                             return _ref3.apply(this, arguments);
                         };
                     }());
@@ -230,7 +231,7 @@ module.exports = function () {
         }
     });
 
-    wx.request = new Proxy(function () {
+    newWx.request = new Proxy(function () {
         var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(url) {
             var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
@@ -346,7 +347,7 @@ module.exports = function () {
                                         }, _callee4, this, [[3, 12]]);
                                     }));
 
-                                    return function resFn(_x9, _x10) {
+                                    return function resFn(_x10, _x11) {
                                         return _ref5.apply(this, arguments);
                                     };
                                 }();
@@ -385,7 +386,7 @@ module.exports = function () {
             }, _callee5, undefined, [[3, 12]]);
         }));
 
-        return function (_x7) {
+        return function (_x8) {
             return _ref4.apply(this, arguments);
         };
     }(), {
@@ -403,4 +404,10 @@ module.exports = function () {
             };
         }
     });
+
+    if (isReturn) {
+        return newWx;
+    } else {
+        wx = newWx;
+    }
 };

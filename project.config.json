@@ -10,7 +10,7 @@
 	"miniprogramRoot": "./example/wxapp",
 	"compileType": "miniprogram",
 	"projectname": "小程序api拦截器",
-	"libVersion": "2.0.8",
+	"libVersion": "2.2.3",
 	"appid": "touristappid",
 	"condition": {
 		"search": {
