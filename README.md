@@ -179,4 +179,4 @@ wxApiInterceptors({
 
 原生小程序项目使用async需要特殊处理，请看[示例](https://github.com/mushan0x0/wxapp-api-interceptors/tree/master/example/wxapp)。
 
-小程序基础版本2.0.8后的小程序，在公众号配置了插件不能直接调用全局wx对象[issues](https://github.com/mushan0x0/wxapp-api-interceptors/issues/9)，需要在调用wxApiInterceptors({}, true)是传入第二个参数为true，会返回一个代理后的对象以供调用，请看[示例](https://github.com/mushan0x0/wxapp-api-interceptors/tree/master/example/wxapp)。
+小程序基础版本2.0.8后的小程序，在后台配置了插件不能直接调用全局wx对象[issues](https://github.com/mushan0x0/wxapp-api-interceptors/issues/9)，需要在调用wxApiInterceptors({}, true)时传入第二个参数为true，会返回一个代理后的对象以供调用，请看[示例](https://github.com/mushan0x0/wxapp-api-interceptors/tree/master/example/wxapp)。
