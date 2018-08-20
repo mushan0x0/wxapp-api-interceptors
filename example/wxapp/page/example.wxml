@@ -1,2 +1,1 @@
-<!--example/example.wxml-->
-<text>example/example.wxml</text>
+<wxparser rich-text="{{richText}}" />
