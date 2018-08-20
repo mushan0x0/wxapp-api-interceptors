@@ -1,6 +1,6 @@
 const wxApiInterceptors = require('./wxApiInterceptors');
 
-const newWx = wxApiInterceptors({
+wx.newWx = wxApiInterceptors({
     showModal: {
         request(params) {
             if (params.confirmColor === undefined) {
@@ -14,7 +14,3 @@ const newWx = wxApiInterceptors({
         },
     }
 }, true);
-
-App({
-    wx: newWx,
-});
