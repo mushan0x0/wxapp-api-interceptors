@@ -346,7 +346,7 @@ module.exports = function () {
                         return _ref3.apply(this, arguments);
                     };
                 }();
-                var fnIsAsync = !(oldWx.canIUse(name + '.success') || !oldWx.canIUse(name + '.return') && oldWx.canIUse(name + '.object') && oldWx.canIUse(name + '.callback') || name === 'checkSession' || interceptors[name]);
+                var fnIsAsync = !(oldWx.canIUse(name + '.success') || !oldWx.canIUse(name + '.return') && oldWx.canIUse(name + '.object') && oldWx.canIUse(name + '.callback') || name === 'checkSession' || name === 'navigateBack'|| name === 'requestPayment' || interceptors[name]);
                 if (interceptors[name] && fnIsAsync) {
                     handleIntercept(true);
                     arg[0] = params;

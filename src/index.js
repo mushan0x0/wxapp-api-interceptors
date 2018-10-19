@@ -103,6 +103,8 @@ export default (interceptors = {}, isReturn = false) => {
                             !oldWx.canIUse(`${name}.return`) && oldWx.canIUse(`${name}.object`) && oldWx.canIUse(`${name}.callback`)
                         )
                         || name === 'checkSession'
+                        || name === 'navigateBack'
+                        || name === 'requestPayment'
                     )
                     || interceptors[name]
                 );
