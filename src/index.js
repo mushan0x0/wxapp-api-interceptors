@@ -105,6 +105,7 @@ export default (interceptors = {}, isReturn = false) => {
                         || name === 'checkSession'
                         || name === 'navigateBack'
                         || name === 'requestPayment'
+                        || name === 'showLoading'
                     )
                     || interceptors[name]
                 );

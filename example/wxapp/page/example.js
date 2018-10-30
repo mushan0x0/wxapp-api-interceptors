@@ -8,6 +8,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     async onLoad(options) {
+        wx.newWx.showLoading().then(wx.newWx.hideLoading);
         await wx.newWx.showModal({title: '测试'})
             .then(console.log)
             .finally(() => {
