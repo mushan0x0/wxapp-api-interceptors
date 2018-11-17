@@ -190,7 +190,7 @@ module.exports = function () {
         };
     }();
     ['options', 'get', 'head', 'post', 'put', 'delete', 'trace', 'connect'].forEach(function (method) {
-        newRequest[method] = function (url) {
+        return newRequest[method] = function (url) {
             var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
             if (params.success || params.fail) {
@@ -199,7 +199,7 @@ module.exports = function () {
             Object.assign(params, {
                 method: method
             });
-            return wx.request(url, params);
+            return newWx.request(url, params);
         };
     });
 

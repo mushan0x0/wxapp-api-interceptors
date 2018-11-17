@@ -65,7 +65,7 @@ export default (interceptors = {}, isReturn = false) => {
             Object.assign(params, {
                 method,
             });
-            return wx.request(url, params);
+            return newWx.request(url, params);
         };
     });
 
